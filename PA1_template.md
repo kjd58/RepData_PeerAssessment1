@@ -32,8 +32,6 @@ summary(data)
 
 I decided that the data needs no pre-processing. The data is already in a tidy format.
 
-
-
 ## What is mean total number of steps taken per day?
 
 ```r
@@ -89,6 +87,10 @@ missing <- sum(is.na(data$steps))
 
 The number of missing step values is 2304.
 
+
+
+
+
 We need a simple strategy to calculate values to subsitute for the missing values.
 I decided to use the mean of number of steps per interval.
 
@@ -96,6 +98,7 @@ I decided to use the mean of number of steps per interval.
 
 ```r
 #    Devise a strategy for filling in all of the missing values in the dataset. The strategy does #not need to be sophisticated. For example, you could use the mean/median for that day, or the #mean for that 5-minute interval, 
+
 
 # calculate a logical array which true is value is missing
 nas <- is.na(data$steps)
@@ -108,7 +111,7 @@ interval_means <- tapply(data$steps, data$interval, mean, na.rm=TRUE, simplify=T
 ```r
 # make a copy of the data set including the missing values
 data_copy <- data
-# subsitute the means for the missing values
+# substitute the means for the missing values
 data_copy$steps[nas] <- interval_means[as.character(data$interval[nas])]
 # re-calculate the number of missing values in the new dataset (should be zero)
 missing <- sum(is.na(data_copy$steps))

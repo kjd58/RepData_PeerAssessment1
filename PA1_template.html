@@ -279,6 +279,7 @@ I decided to use the mean of number of steps per interval.</p>
 
 <pre><code class="r">#    Devise a strategy for filling in all of the missing values in the dataset. The strategy does #not need to be sophisticated. For example, you could use the mean/median for that day, or the #mean for that 5-minute interval, 
 
+
 # calculate a logical array which true is value is missing
 nas &lt;- is.na(data$steps)
 # calculate a list of the means of the number of steps per interval
@@ -289,7 +290,7 @@ interval_means &lt;- tapply(data$steps, data$interval, mean, na.rm=TRUE, simplif
 
 <pre><code class="r"># make a copy of the data set including the missing values
 data_copy &lt;- data
-# subsitute the means for the missing values
+# substitute the means for the missing values
 data_copy$steps[nas] &lt;- interval_means[as.character(data$interval[nas])]
 # re-calculate the number of missing values in the new dataset (should be zero)
 missing &lt;- sum(is.na(data_copy$steps))
